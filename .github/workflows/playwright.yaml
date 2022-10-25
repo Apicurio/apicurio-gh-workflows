@@ -2,13 +2,17 @@ name: Playwright Tests
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       username:
         required: false
         type: string
       password:
         required: false
         type: string
+      chat-webhook:
+        required: false
+        type: string
+    inputs:
       os:
         required: false
         type: string
@@ -57,8 +61,8 @@ jobs:
 
     - name: Run Playwright tests
       env:
-        TEST_USERNAME: ${{ inputs.username }}
-        TEST_PASSWORD: ${{ inputs.password }}
+        TEST_USERNAME: ${{ secrets.username }}
+        TEST_PASSWORD: ${{ secrets.password }}
       run: npx playwright test ${{ inputs.options }}
     - uses: actions/upload-artifact@v3
       if: always()
@@ -78,6 +82,6 @@ jobs:
       uses: Co-qn/google-chat-notification@b9227d9daa4638c9782a5bd16c4abb86268127a1
       with:
         name: Operate First E2E Test
-        url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+        url: ${{ secrets.chat-webhook }}
         status: ${{ job.status }}
       if: failure() && inputs.notify-on-failure
