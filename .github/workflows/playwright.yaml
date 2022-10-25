@@ -3,12 +3,6 @@ name: Playwright Tests
 on:
   workflow_call:
     inputs:
-      username:
-        required: true
-        type: string
-      password:
-        required: true
-        type: string
       options:
         required: false
         type: string
@@ -58,8 +52,8 @@ jobs:
 
     - name: Run Playwright tests
       env:
-        TEST_USERNAME: ${{ inputs.username }}
-        TEST_PASSWORD: ${{ inputs.password }}
+        TEST_USERNAME: "${{ secrets.USERNAME }}-${{ matrix.os }}"
+        TEST_PASSWORD: ${{ secrets.PASSWORD }}
       run: npx playwright test ${{ inputs.options }}
     - uses: actions/upload-artifact@v3
       if: always()
