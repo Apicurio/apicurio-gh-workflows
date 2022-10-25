@@ -9,6 +9,9 @@ on:
       password:
         required: true
         type: string
+      options:
+        required: false
+        type: string
 
 jobs:
   playwright:
@@ -54,7 +57,7 @@ jobs:
       env:
         TEST_USERNAME: ${{ inputs.username }}
         TEST_PASSWORD: ${{ inputs.password }}
-      run: npx playwright test
+      run: npx playwright test ${{ inputs.options }}
     - uses: actions/upload-artifact@v3
       if: always()
       with:
