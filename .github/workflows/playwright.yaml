@@ -5,13 +5,10 @@ on:
     secrets:
       username:
         required: false
-        type: string
       password:
         required: false
-        type: string
       chat-webhook:
         required: false
-        type: string
     inputs:
       os:
         required: false
