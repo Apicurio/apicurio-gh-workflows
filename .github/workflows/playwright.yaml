@@ -1,4 +1,4 @@
-name: Trivy Image Scan
+name: Playwright Tests
 
 on:
   workflow_call:
@@ -11,8 +11,8 @@ on:
         type: string
 
 jobs:
-  setup-playwright:
-    name: Container vulnerability scan
+  playwright:
+    name: Run Playwright Tests
     strategy:
       fail-fast: false
       matrix:
