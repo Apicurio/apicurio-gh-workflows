@@ -74,6 +74,22 @@ jobs:
         path: test-results/
         retention-days: 1
 
+    - name: Increment value
+      # main
+      uses: yoichiro/gh-action-increment-value@5a51be9d5cac40e1cad794227f9e1766dd8036eb
+      with:
+        target_file: 'build_number.txt'
+        commit_message: 'Automatic build number increment '
+
+    - name: Release
+      # v1
+      uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5
+      tag_name: 
+      if: always()
+      with:
+        files: |
+          results.xml
+
     - name: Google Chat Notification
       # release/v1
       uses: Co-qn/google-chat-notification@b9227d9daa4638c9782a5bd16c4abb86268127a1
