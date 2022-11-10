@@ -74,23 +74,23 @@ jobs:
         path: test-results/
         retention-days: 1
 
-    - name: Increment value
-      # main
-      uses: yoichiro/gh-action-increment-value@5a51be9d5cac40e1cad794227f9e1766dd8036eb
-      with:
-        target_file: 'build_number.txt'
-        commit_message: 'Automatic build number increment '
+    # - name: Increment value
+    #   # main
+    #   uses: yoichiro/gh-action-increment-value@5a51be9d5cac40e1cad794227f9e1766dd8036eb
+    #   with:
+    #     target_file: 'build_number.txt'
+    #     commit_message: 'Automatic build number increment '
 
-    - name: Get the build number
-      id: build-version
-      run: echo "build_number=$(cat build_number.txt)" >> $GITHUB_OUTPUT
+    # - name: Get the build number
+    #   id: build-version
+    #   run: echo "build_number=$(cat build_number.txt)" >> $GITHUB_OUTPUT
 
     - name: Release
       # v1
       uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5
       if: always()
       with:
-        tag_name: ${{ steps.build-version.outputs.build_number }}
+        tag_name: ${{ github.run_id }}
         files: |
           results.xml
 
