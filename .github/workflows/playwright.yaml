@@ -56,10 +56,6 @@ jobs:
     - name: Install Playwright's OS dependencies
       run: npx playwright install-deps
 
-    - name: Install Playwright's Ubuntu specific dependencies
-      if: inputs.os == 'ubuntu-latest'
-      run: sudo apt-get install -y libicu70 libwebp7
-
     - name: Run Playwright tests
       env:
         TEST_USERNAME: ${{ secrets.username }}
