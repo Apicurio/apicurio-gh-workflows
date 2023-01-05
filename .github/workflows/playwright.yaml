@@ -7,6 +7,10 @@ on:
         required: false
       password:
         required: false
+      admin-username:
+        required: false
+      admin-password:
+        required: false
       chat-webhook:
         required: false
     inputs:
@@ -60,6 +64,8 @@ jobs:
       env:
         TEST_USERNAME: ${{ secrets.username }}
         TEST_PASSWORD: ${{ secrets.password }}
+        TEST_ADMIN_USERNAME: ${{ secrets.admin-username }}
+        TEST_ADMIN_PASSWORD: ${{ secrets.admin-password }}
       run: npx playwright test ${{ inputs.options }}
     - uses: actions/upload-artifact@v3
       if: always()
